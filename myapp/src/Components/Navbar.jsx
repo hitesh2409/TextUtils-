@@ -1,11 +1,10 @@
 import React from "react";
-import PropTypes from 'prop-types'
-
+import PropTypes from "prop-types";
 
 export default function Navbar(props) {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-secondary">
+      <nav className={`navbar navbar-expand-lg  navbar-${props.mode} bg-${props.mode}`}>
         <div className="container-fluid">
           <a className="navbar-brand" href="/">
             {props.title} <b>HiTu</b>
@@ -23,17 +22,21 @@ export default function Navbar(props) {
                 </a>
               </li>
             </ul>
-            <form className="d-flex" role="search">
+            <div className="form-check form-switch">
               <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
+                className="form-check-input"
+                type="checkbox"
+                role="switch"
+                id="flexSwitchCheckDefault"
+                onClick={props.toggleMode}
               />
-              <button className="btn btn-outline-info" type="submit">
-                Search
-              </button>
-            </form>
+              <label
+                className={`form-check-label text-${props.mode==="light"?"dark":"light"}`}
+                htmlFor="flexSwitchCheckDefault"
+              >
+                Change Mode
+              </label>
+            </div>
           </div>
         </div>
       </nav>
@@ -41,9 +44,9 @@ export default function Navbar(props) {
   );
 }
 
-Navbar.propTypes={title:PropTypes.string, aboutText:PropTypes.string}
+Navbar.propTypes = { title: PropTypes.string, aboutText: PropTypes.string };
 
-Navbar.defaultProps={
-  title:"Hitu",
-aboutText:"About Us"
-}
+Navbar.defaultProps = {
+  title: "Hitu",
+  aboutText: "About Us",
+};

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Formtext(props) {
+export default function TextForm(props) {
   const [text, setText] = useState("");
 
   const handleLowclick = () => {
@@ -30,51 +30,20 @@ export default function Formtext(props) {
     setText(event.target.value);
   };
 
-  const [myStyle, setMyStyle] = useState({
-    color: "black",
-    backgroundColor: "white",
-    borderRadius: "5px",
-  });
-
-  const [btnText, setBtnText]=useState("Enable Dark Mode");
-
-  const modeChange = () => {
-    if (myStyle.color === "white") {
-      setMyStyle({
-        color: "black",
-        backgroundColor: "white",
-        borderRadius: "5px",
-      });
-      setBtnText("Enable Dark Mode")
-    } else {
-      setMyStyle({
-        color: "white",
-        backgroundColor: "#00001a",
-        borderRadius: "5px",
-      });
-      setBtnText("Enable Light Mode")
-    }
-  };
 
   return (
     <>
-      <div className="container my-3 p-3" style={myStyle}>
-        <button
-          className="container btn btn-light my-2 d-grid"
-          onClick={modeChange}
-        >
-          {btnText}
-        </button>
+      <div className="container my-3 p-3" style={{color:props.mode==="dark"?"white":"black"}}>
         <h1 className="my-3">{props.heading}</h1>
         <div className="my-3">
           <textarea
-            style={myStyle}
             className="form-control"
             id="formbox"
             value={text}
             rows="8"
             placeholder="EnTer YoUr TeXt"
             onChange={handleOnChange}
+            style={{backgroundColor:props.mode==="dark"?"#00001a":"white",color:props.mode==="dark"?"white":"black"}}
           ></textarea>
         </div>
         <div className="d-flex gap-3">
@@ -106,7 +75,7 @@ export default function Formtext(props) {
           </p>
           <h2>Preview Text 👇</h2>
           <p>
-            <i>{text.length>0?text:"Enter some text in Textbox to preview it here"}</i>
+            <i>{text.length>0?text:"Enter some text in Textbox to preview it here*"}</i>
           </p>
         </div>
       </div>
